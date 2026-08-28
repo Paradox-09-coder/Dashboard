@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 const MenuIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -20,13 +21,8 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--background)]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 md:px-10">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="grid h-8 w-8 flex-shrink-0 place-items-center rounded-[9px] bg-[var(--lime)] text-[13px] font-black text-black">
-            D
-          </div>
-          <span className="font-[family-name:var(--font-jakarta)] text-[17px] font-extrabold tracking-tight text-[var(--foreground)]">
-            Data365
-          </span>
+        <Link href="/" className="flex items-center">
+          <Image src="/logo.png" alt="Data365" width={140} height={40} className="h-9 w-auto object-contain" />
         </Link>
 
         {/* Desktop links */}

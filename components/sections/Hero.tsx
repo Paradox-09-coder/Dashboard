@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 function drawAreaChart(
   canvas: HTMLCanvasElement,
@@ -125,13 +126,13 @@ export function Hero() {
 
           <div className="mt-10 flex items-center gap-3">
             <div className="flex">
-              {["AJ", "SN", "KB", "MT"].map((i, idx) => (
+              {["/team/p1.png", "/team/p2.png", "/team/p3.png", "/team/p4.png", "/team/p5.png"].map((src, idx) => (
                 <div
-                  key={i}
-                  className="grid h-8 w-8 place-items-center rounded-full border-2 border-[var(--background)] bg-[var(--lime)] text-[10px] font-bold text-black"
-                  style={{ marginLeft: idx > 0 ? "-8px" : "0" }}
+                  key={src}
+                  className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-[var(--background)]"
+                  style={{ marginLeft: idx > 0 ? "-10px" : "0" }}
                 >
-                  {i}
+                  <Image src={src} alt="Mijoz" fill className="object-cover object-top" />
                 </div>
               ))}
             </div>

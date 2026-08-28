@@ -14,11 +14,11 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Dashboardlar />
         <Integrations />
+        <Dashboardlar />
+        <Hamkorlar />
         <Features />
         <AISection />
-        <Hamkorlar />
         <CTA />
       </main>
       <Footer />

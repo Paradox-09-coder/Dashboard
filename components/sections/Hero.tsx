@@ -96,7 +96,7 @@ export function Hero() {
           <h1 className="mb-4 font-[family-name:var(--font-jakarta)] text-[clamp(36px,5vw,60px)] font-extrabold leading-[1.08] tracking-[-0.025em] text-[var(--foreground)]">
             Barcha biznes
             <br />
-            ko&apos;rsatkichlari —
+            ko&apos;rsatkichlari
             <br />
             <span className="relative inline-block">
               bitta ekranda

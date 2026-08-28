@@ -14,8 +14,8 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Integrations />
         <Dashboardlar />
+        <Integrations />
         <Features />
         <AISection />
         <Hamkorlar />

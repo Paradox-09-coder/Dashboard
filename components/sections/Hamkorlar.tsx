@@ -1,16 +1,6 @@
 "use client";
-import { useState } from "react";
 
 const BASE = "https://www.data365.uz/mijozlar-logo/";
-
-const CATEGORIES = [
-  { key: "barchasi", label: "Barchasi" },
-  { key: "talim", label: "Ta'lim", count: 32 },
-  { key: "savdo", label: "Savdo", count: 38 },
-  { key: "tur", label: "Tur firma", count: 5 },
-  { key: "xizmat", label: "Xizmat", count: 9 },
-  { key: "boshqa", label: "Boshqalar", count: 7 },
-];
 
 type Client = { name: string; src: string; cat: string };
 
@@ -116,74 +106,68 @@ const CLIENTS: Client[] = [
   { name: "Logistika Vitana", src: BASE + "Logistika/Vitana.svg", cat: "boshqa" },
 ];
 
-export function Hamkorlar() {
-  const [active, setActive] = useState("barchasi");
+const ROW1 = CLIENTS.slice(0, Math.ceil(CLIENTS.length / 2));
+const ROW2 = CLIENTS.slice(Math.ceil(CLIENTS.length / 2));
 
-  const filtered = active === "barchasi" ? CLIENTS : CLIENTS.filter((c) => c.cat === active);
-
+function LogoCard({ client }: { client: Client }) {
   return (
-    <section className="border-t border-[var(--border)] px-5 py-20 md:px-10">
-      <div className="mx-auto max-w-[1200px]">
-        <div className="mb-10 text-center">
-          <p className="mb-2 text-[12px] font-semibold uppercase tracking-widest text-[var(--muted)]">
-            Hamkorlar
-          </p>
-          <h2 className="font-[family-name:var(--font-jakarta)] text-[clamp(26px,3.5vw,42px)] font-extrabold tracking-tight text-[var(--foreground)]">
-            Biz bilan ishlaydigan kompaniyalar
-          </h2>
-          <p className="mx-auto mt-3 max-w-[460px] text-[16px] leading-relaxed text-[var(--muted)]">
-            150+ kompaniya Data365 Dashboard orqali o&apos;z biznesini real vaqtda kuzatmoqda
-          </p>
-        </div>
+    <div
+      title={client.name}
+      className="flex h-[68px] w-[120px] flex-shrink-0 items-center justify-center rounded-[12px] bg-[#111] px-4"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={client.src}
+        alt={client.name}
+        loading="lazy"
+        className="max-h-[40px] w-full object-contain opacity-75"
+        onError={(e) => {
+          (e.target as HTMLImageElement).style.display = "none";
+        }}
+      />
+    </div>
+  );
+}
 
-        {/* Filter tabs */}
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat.key}
-              onClick={() => setActive(cat.key)}
-              className={`rounded-full px-4 py-2 text-[13px] font-semibold transition-all ${
-                active === cat.key
-                  ? "bg-[var(--lime)] text-black shadow-sm"
-                  : "border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:text-[var(--foreground)]"
-              }`}
-            >
-              {cat.label}
-              {cat.count && (
-                <span className={`ml-1.5 text-[11px] ${active === cat.key ? "opacity-70" : "opacity-50"}`}>
-                  {cat.count}
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
+function MarqueeRow({ clients, reverse }: { clients: Client[]; reverse?: boolean }) {
+  const doubled = [...clients, ...clients];
+  return (
+    <div className="overflow-hidden">
+      <div
+        className={`flex gap-3 ${reverse ? "animate-marquee-right" : "animate-marquee-left"}`}
+        style={{ width: "max-content" }}
+      >
+        {doubled.map((client, i) => (
+          <LogoCard key={`${client.name}-${i}`} client={client} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
-        {/* Logo grid — dark cards like data365.uz */}
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
-          {filtered.map((client) => (
-            <div
-              key={client.name}
-              title={client.name}
-              className="group flex h-[72px] items-center justify-center rounded-[14px] bg-[#111] p-3 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={client.src}
-                alt={client.name}
-                loading="lazy"
-                className="max-h-[44px] w-full object-contain opacity-80 transition-opacity group-hover:opacity-100"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
-              />
-            </div>
-          ))}
-        </div>
-
-        <p className="mt-6 text-center text-[12px] text-[var(--muted)]">
-          va boshqa 100+ kompaniya...
+export function Hamkorlar() {
+  return (
+    <section className="border-t border-[var(--border)] py-20">
+      <div className="mb-10 px-5 text-center md:px-10">
+        <p className="mb-2 text-[12px] font-semibold uppercase tracking-widest text-[var(--muted)]">
+          Hamkorlar
+        </p>
+        <h2 className="font-[family-name:var(--font-jakarta)] text-[clamp(26px,3.5vw,42px)] font-extrabold tracking-tight text-[var(--foreground)]">
+          Biz bilan ishlaydigan kompaniyalar
+        </h2>
+        <p className="mx-auto mt-3 max-w-[460px] text-[16px] leading-relaxed text-[var(--muted)]">
+          150+ kompaniya Data365 Dashboard orqali o&apos;z biznesini real vaqtda kuzatmoqda
         </p>
       </div>
+
+      <div className="flex flex-col gap-3">
+        <MarqueeRow clients={ROW1} />
+        <MarqueeRow clients={ROW2} reverse />
+      </div>
+
+      <p className="mt-6 text-center text-[12px] text-[var(--muted)]">
+        va boshqa 100+ kompaniya...
+      </p>
     </section>
   );
 }

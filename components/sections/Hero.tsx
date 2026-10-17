@@ -132,7 +132,13 @@ export function Hero() {
                   className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-[var(--background)]"
                   style={{ marginLeft: idx > 0 ? "-10px" : "0" }}
                 >
-                  <Image src={src} alt="Mijoz" fill className="object-cover object-top" />
+                  <Image
+                    src={src}
+                    alt="Mijoz"
+                    fill
+                    className="object-cover"
+                    style={{ objectPosition: src.endsWith("p5.png") ? "50% 26%" : "top" }}
+                  />
                 </div>
               ))}
             </div>

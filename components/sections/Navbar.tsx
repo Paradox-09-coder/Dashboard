@@ -25,8 +25,6 @@ export function Navbar() {
           <Image src="/logo.png" alt="Data365" width={140} height={40} className="h-9 w-auto object-contain" />
         </Link>
 
-        <span className="text-[15px] font-semibold text-[var(--foreground)]">Hello</span>
-
         {/* Desktop links */}
         <ul className="hidden items-center gap-7 md:flex">
           {["Integratsiyalar", "Modullar", "Narxlar", "Blog"].map((l) => (
